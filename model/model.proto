@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package model;
+option go_package = "github.com/micro-svc/go-rpc-framework-benchmark/model/grpc/model";
+
+enum Enum {
+  EnumA = 0;
+  EnumB = 1;
+  EnumC = 2;
+}
+
+message SubMessage {
+  double          field01 = 1;
+  int64           field02 = 2;
+  bool            field03 = 3;
+  string          field04 = 4;
+  bytes           field05 = 5;
+  Enum            field06 = 6;
+  repeated double field07 = 7;
+  repeated int64  field08 = 8;
+  repeated bool   field09 = 9;
+  repeated string field10 = 10;
+  repeated bytes  field11 = 11;
+  repeated Enum   field12 = 12;
+}
+
+message Message {
+  double              field01 = 1;
+  int64               field02 = 2;
+  bool                field03 = 3;
+  string              field04 = 4;
+  bytes               field05 = 5;
+  Enum                field06 = 6;
+  repeated double     field07 = 7;
+  repeated int64      field08 = 8;
+  repeated bool       field09 = 9;
+  repeated string     field10 = 10;
+  repeated bytes      field11 = 11;
+  repeated Enum       field12 = 12;
+  SubMessage          field13 = 13;
+  repeated SubMessage field14 = 14;
+}
+
+service Hello {
+  rpc Hello(Message) returns (Message) {};
+}
