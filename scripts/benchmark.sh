@@ -11,6 +11,7 @@ then
 fi
 
 touch go-rpc-framework-benchmark.result
+echo "" > go-rpc-framework-benchmark.result
 
 while IFS="|" read -r name package server client
 do
