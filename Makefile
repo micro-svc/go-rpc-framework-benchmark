@@ -1,6 +1,6 @@
 GOBUILD = go build -ldflags "-w -s"
 
-ALL: lint build benchmark
+ALL: lint build
 
 .PHONY: lint
 lint:

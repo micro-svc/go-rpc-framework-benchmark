@@ -12,8 +12,13 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	cligrpc "github.com/micro/go-micro/v2/client/grpc"
+	"github.com/micro/go-micro/v2/codec/json"
+	"github.com/micro/go-micro/v2/codec/proto"
 	"github.com/micro/go-micro/v2/server"
 	srvgrpc "github.com/micro/go-micro/v2/server/grpc"
+	ts "github.com/micro/go-micro/v2/transport"
+	tsgrpc "github.com/micro/go-micro/v2/transport/grpc"
+	tshttp "github.com/micro/go-micro/v2/transport/http"
 	"github.com/montanaflynn/stats"
 	"github.com/phuslu/log"
 )
@@ -22,7 +27,11 @@ var (
 	// flags
 	clients   = flag.Int("clients", 100, "concurrency client amount")
 	requests  = flag.Int("requests", 1000, "request amount per client")
-	transport = flag.String("transport", "grpc", "server transport") // grpc
+	transport = flag.String("transport", "grpc", "server transport") // grpc, http
+	codec     = flag.String("codec", "protobuf", "server codec")     // protobuf, json
+
+	newServer = server.NewServer
+	newClient = client.NewClient
 )
 
 func main() {
@@ -30,10 +39,34 @@ func main() {
 
 	switch *transport {
 	case "grpc":
-		server.DefaultServer = srvgrpc.NewServer()
-		client.DefaultClient = cligrpc.NewClient()
+		newServer = srvgrpc.NewServer
+		newClient = cligrpc.NewClient
+		ts.DefaultTransport = tsgrpc.NewTransport()
+	case "http":
+		ts.DefaultTransport = tshttp.NewTransport()
 	default:
 		log.Fatal().Msg("flag transport not support")
+	}
+
+	switch *codec {
+	case "protobuf":
+		server.DefaultServer = newServer(
+			server.Codec("application/protobuf", proto.NewCodec),
+		)
+		client.DefaultClient = newClient(
+			client.Codec("application/protobuf", proto.NewCodec),
+			client.ContentType("application/protobuf"),
+		)
+	case "json":
+		server.DefaultServer = newServer(
+			server.Codec("application/json", json.NewCodec),
+		)
+		client.DefaultClient = newClient(
+			client.Codec("application/json", json.NewCodec),
+			client.ContentType("application/json"),
+		)
+	default:
+		log.Fatal().Msg("flag codec not support")
 	}
 
 	var (
@@ -79,7 +112,9 @@ func newClients(amount int) []model.HelloService {
 	clis := make([]model.HelloService, amount)
 	for i := 0; i < amount; i++ {
 		service := micro.NewService()
-		clis[i] = model.NewHelloService("hello", service.Client())
+		mcli := service.Client()
+		ulog.FatalIfError(mcli.Init(client.RequestTimeout(time.Second * 30)))
+		clis[i] = model.NewHelloService("hello", mcli)
 		call(clis[i]) // warmup
 	}
 	return clis

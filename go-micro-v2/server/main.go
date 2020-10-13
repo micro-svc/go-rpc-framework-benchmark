@@ -10,15 +10,21 @@ import (
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/client"
 	cligrpc "github.com/micro/go-micro/v2/client/grpc"
+	"github.com/micro/go-micro/v2/codec/json"
+	"github.com/micro/go-micro/v2/codec/proto"
 	"github.com/micro/go-micro/v2/server"
 	srvgrpc "github.com/micro/go-micro/v2/server/grpc"
+	ts "github.com/micro/go-micro/v2/transport"
 	"github.com/phuslu/log"
 )
 
 var (
 	// flags
 	address   = flag.String("addr", "127.0.0.1:5678", "server listen address")
-	transport = flag.String("transport", "grpc", "server transport") // grpc
+	transport = flag.String("transport", "grpc", "server transport") // grpc, http
+
+	newServer = server.NewServer
+	newClient = client.NewClient
 )
 
 type Server struct{}
@@ -30,15 +36,25 @@ func (s *Server) Hello(ctx context.Context, req *model.Message, rsp *model.Messa
 
 func main() {
 	flag.Parse()
-	ulog.ColorConsole()
 
 	switch *transport {
 	case "grpc":
-		server.DefaultServer = srvgrpc.NewServer()
-		client.DefaultClient = cligrpc.NewClient()
+		newServer = srvgrpc.NewServer
+		newClient = cligrpc.NewClient
+	case "http":
+		ts.DefaultTransport = ts.NewTransport()
 	default:
 		log.Fatal().Msg("flag transport not support")
 	}
+
+	server.DefaultServer = newServer(
+		server.Codec("application/json", json.NewCodec),
+		server.Codec("application/protobuf", proto.NewCodec),
+	)
+	client.DefaultClient = newClient(
+		client.Codec("application/json", json.NewCodec),
+		client.Codec("application/protobuf", proto.NewCodec),
+	)
 
 	svc := micro.NewService(
 		micro.Name("hello"),
