@@ -29,7 +29,6 @@ func (s *Server) Hello(ctx context.Context, req *model.Message) (*model.Message,
 
 func main() {
 	flag.Parse()
-	ulog.ColorConsole()
 
 	lis, err := net.Listen("tcp", *address)
 	if err != nil {

@@ -26,7 +26,6 @@ func (s *Server) Hello(ctx *gin.Context) {
 
 func main() {
 	flag.Parse()
-	ulog.ColorConsole()
 	gin.SetMode(gin.ReleaseMode)
 
 	srv := &Server{}

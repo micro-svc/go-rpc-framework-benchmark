@@ -31,7 +31,6 @@ func (s *Server) Hello(ctx context.Context, req *model.Message, rsp *model.Messa
 
 func main() {
 	flag.Parse()
-	ulog.ColorConsole()
 	xlog.SetDummyLogger()
 	codec.Register()
 

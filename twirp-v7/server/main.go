@@ -26,7 +26,6 @@ func (s *Server) Hello(ctx context.Context, req *model.Message) (*model.Message,
 
 func main() {
 	flag.Parse()
-	ulog.ColorConsole()
 
 	log.Info().Str("address", *address).Msg("server running")
 	ulog.FatalIfError(http.ListenAndServe(*address, model.NewHelloServer(new(Server))))
