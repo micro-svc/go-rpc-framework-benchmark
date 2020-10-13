@@ -1,21 +1,31 @@
 ## 压测列表
 
-| name      | package                                          | transport | codec    |     tps |
-| --------- | ------------------------------------------------ | --------- | -------- | ------: |
-| grpc      | [grpc](https://github.com/grpc/grpc-go)          | grpc      | protobuf | `47015` |
-| rpcx01    | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | json     | `36211` |
-| rpcx02    | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | protobuf | `70442` |
-| rpcx03    | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | msgpack  | `39274` |
-| rpcx04    | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | jsoniter | `50385` |
-| rpcx05    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | json     | `21280` |
-| rpcx06    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | protobuf | `31102` |
-| rpcx07    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | msgpack  | `22943` |
-| rpcx08    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | jsoniter | `26421` |
-| gomicro01 | [go-micro/v2](https://github.com/micro/go-micro) | grpc      | protobuf | `23336` |
-| twirp01   | [twirp/v7](https://github.com/twitchtv/twirp)    | http      | json     |  `6251` |
-| twirp02   | [twirp/v7](https://github.com/twitchtv/twirp)    | http      | protobuf | `21432` |
+| name      | type  | package                                          | transport | codec    |     tps |
+| --------- | ----- | ------------------------------------------------ | --------- | -------- | ------: |
+| gin       | `WEB` | [gin](https://github.com/gin-gonic/gin)          | http      | json     | `26694` |
+| grpc      | `RPC` | [grpc](https://github.com/grpc/grpc-go)          | grpc      | protobuf | `47015` |
+| rpcx01    | `MIC` | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | json     | `36211` |
+| rpcx02    | `MIC` | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | protobuf | `70442` |
+| rpcx03    | `MIC` | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | msgpack  | `39274` |
+| rpcx04    | `MIC` | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | jsoniter | `50385` |
+| rpcx05    | `MIC` | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | json     | `21280` |
+| rpcx06    | `MIC` | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | protobuf | `31102` |
+| rpcx07    | `MIC` | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | msgpack  | `22943` |
+| rpcx08    | `MIC` | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | jsoniter | `26421` |
+| gomicro01 | `MIC` | [go-micro/v2](https://github.com/micro/go-micro) | grpc      | protobuf | `23336` |
+| twirp01   | `RPC` | [twirp/v7](https://github.com/twitchtv/twirp)    | http      | json     |  `7728` |
+| twirp02   | `RPC` | [twirp/v7](https://github.com/twitchtv/twirp)    | http      | protobuf | `38688` |
+
+> 类型说明：`RPC` 表示只实现了简单的 RPC 功能；`MIC` 表示实现了微服务框架的大部分特性；`WEB` 表示传统的 WEB 框架，只是作为对比出现。
 
 ## 详细结果
+
+### gin
+
+```
+2020-10-13T13:06:35.941+08:00 INF 1 main.go:39 >  clients=100 requests=1000 total=100000
+2020-10-13T13:06:39.721+08:00 INF 1 main.go:62 >  tps=26694 min=170.532µs max=39.744728ms mean=3.681064ms median=2.45578ms
+```
 
 ### grpc
 
@@ -90,15 +100,15 @@
 ### twirp01
 
 ```
-2020-10-13T00:07:47.758+08:00 INF 1 main.go:48 >  clients=100 requests=100 total=10000
-2020-10-13T00:07:49.360+08:00 INF 1 main.go:71 >  tps=6251 min=455.483µs max=87.317299ms mean=15.293143ms median=12.795295ms
+2020-10-13T11:56:17.667+08:00 INF 1 main.go:50 >  clients=100 requests=1000 total=100000
+2020-10-13T11:56:30.639+08:00 INF 1 main.go:73 >  tps=7728 min=438.821µs max=153.618607ms mean=12.732407ms median=8.769251ms
 ```
 
 ### twirp02
 
 ```
-2020-10-13T00:08:35.644+08:00 INF 1 main.go:48 >  clients=100 requests=100 total=10000
-2020-10-13T00:08:36.113+08:00 INF 1 main.go:71 >  tps=21432 min=130.911µs max=33.457038ms mean=4.420915ms median=3.550289ms
+2020-10-13T11:55:23.837+08:00 INF 1 main.go:50 >  clients=100 requests=1000 total=100000
+2020-10-13T11:55:26.453+08:00 INF 1 main.go:73 >  tps=38688 min=111.06µs max=26.905751ms mean=2.540243ms median=1.726098ms
 ```
 
 ## TODO
