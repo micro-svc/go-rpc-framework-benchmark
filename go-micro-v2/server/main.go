@@ -40,12 +40,12 @@ func main() {
 		log.Fatal().Msg("flag transport not support")
 	}
 
-	service := micro.NewService(
+	svc := micro.NewService(
 		micro.Name("hello"),
 		micro.Address(*address),
 	)
 
-	ulog.FatalIfError(model.RegisterHelloHandler(service.Server(), new(Server)))
+	ulog.FatalIfError(model.RegisterHelloHandler(svc.Server(), new(Server)))
 	log.Info().Str("address", *address).Msg("server running")
-	ulog.FatalIfError(service.Run())
+	ulog.FatalIfError(svc.Run())
 }

@@ -43,9 +43,9 @@ func main() {
 		log.Fatal().Msg("flag transport not support")
 	}
 
-	// server.UsePool = true
-	server := server.NewServer(options...)
-	ulog.FatalIfError(server.RegisterName("hello", new(Server), ""))
+	server.UsePool = true
+	srv := server.NewServer(options...)
+	ulog.FatalIfError(srv.RegisterName("hello", new(Server), ""))
 	log.Info().Str("address", *address).Msg("server running")
-	ulog.FatalIfError(server.Serve(*transport, *address))
+	ulog.FatalIfError(srv.Serve(*transport, *address))
 }
