@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Go RPC framework benchmark</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/apexcharts@3.22.0/dist/apexcharts.css"
+    />
+    <style>
+      #chart {
+        max-width: 850px;
+        margin: 50px auto;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.22.0/dist/apexcharts.min.js"></script>
+  </head>
+
+  <body>
+    <div id="chart"></div>
+    <script>
+      var categories = [
+        "gin",
+        "grpc",
+        "rpcx-01",
+        "rpcx-02",
+        "rpcx-03",
+        "rpcx-04",
+        "rpcx-05",
+        "rpcx-06",
+        "rpcx-07",
+        "rpcx-08",
+        "go-micro-01",
+        "go-micro-02",
+        "go-micro-03",
+        "go-micro-04",
+        "twirp-01",
+        "twirp-02",
+        "erpc-01",
+        "erpc-02",
+      ];
+      var data = [
+        28557,
+        45990,
+        37966,
+        72877,
+        40343,
+        53458,
+        23688,
+        33486,
+        24396,
+        27381,
+        6348,
+        24585,
+        4252,
+        4078,
+        8378,
+        42621,
+        37915,
+        63284,
+      ];
+      var colors = [
+        "#264653",
+        "#2a9d8f",
+        "#e9c46a",
+        "#e9c46a",
+        "#e9c46a",
+        "#e9c46a",
+        "#e9c46a",
+        "#e9c46a",
+        "#e9c46a",
+        "#e9c46a",
+        "#f4a261",
+        "#f4a261",
+        "#f4a261",
+        "#f4a261",
+        "#e76f51",
+        "#e76f51",
+        "#264653",
+        "#264653",
+      ];
+      var options = {
+        colors: colors,
+        legend: { show: false },
+        grid: { strokeDashArray: 10 },
+        xaxis: { categories: categories },
+        yaxis: { labels: { show: false } },
+        series: [{ name: "TPS", data: data }],
+        stroke: { width: 1, colors: ["#fff"] },
+        chart: { type: "bar", height: 50 * data.length },
+        subtitle: { text: "TPS (transaction per second)", align: "center" },
+        title: { text: "Go RPC framework benchmark result", align: "center" },
+        plotOptions: {
+          bar: {
+            horizontal: true,
+            distributed: true,
+            barHeight: "100%",
+            dataLabels: { position: "top" },
+          },
+        },
+        dataLabels: {
+          offsetX: 30,
+          enabled: true,
+          textAnchor: "start",
+          style: { colors: ["#000"] },
+          formatter: function (val, opt) {
+            return opt.w.globals.labels[opt.dataPointIndex] + ": " + val;
+          },
+        },
+      };
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+    </script>
+  </body>
+</html>
