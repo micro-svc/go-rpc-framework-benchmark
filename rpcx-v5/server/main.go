@@ -5,6 +5,7 @@ import (
 	"flag"
 
 	"github.com/micro-svc/go-rpc-framework-benchmark/model/standard/model"
+	"github.com/micro-svc/go-rpc-framework-benchmark/rpcx-v5/codec"
 	"github.com/micro-svc/go-rpc-framework-benchmark/rpcx-v5/tls"
 
 	ulog "github.com/gxxgle/go-utils/log"
@@ -30,8 +31,9 @@ func (s *Server) Hello(ctx context.Context, req *model.Message, rsp *model.Messa
 
 func main() {
 	flag.Parse()
-	xlog.SetDummyLogger()
 	ulog.ColorConsole()
+	xlog.SetDummyLogger()
+	codec.Register()
 
 	switch *transport {
 	case "tcp":

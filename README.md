@@ -6,9 +6,11 @@
 | rpcx01    | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | json     | `36211` |
 | rpcx02    | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | protobuf | `70442` |
 | rpcx03    | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | msgpack  | `39274` |
-| rpcx04    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | json     | `21280` |
-| rpcx05    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | protobuf | `31102` |
-| rpcx06    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | msgpack  | `22943` |
+| rpcx04    | [rpcx/v5](https://github.com/smallnest/rpcx)     | tcp       | jsoniter | `50385` |
+| rpcx05    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | json     | `21280` |
+| rpcx06    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | protobuf | `31102` |
+| rpcx07    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | msgpack  | `22943` |
+| rpcx08    | [rpcx/v5](https://github.com/smallnest/rpcx)     | quic      | jsoniter | `26421` |
 | gomicro01 | [go-micro/v2](https://github.com/micro/go-micro) | grpc      | protobuf | `23336` |
 | twirp01   | [twirp/v7](https://github.com/twitchtv/twirp)    | http      | json     |  `6251` |
 | twirp02   | [twirp/v7](https://github.com/twitchtv/twirp)    | http      | protobuf | `21432` |
@@ -46,22 +48,36 @@
 ### rpcx04
 
 ```
+2020-10-13T11:02:01.346+08:00 INF 1 main.go:66 >  clients=100 requests=1000 total=100000
+2020-10-13T11:02:03.364+08:00 INF 1 main.go:89 >  tps=50385 min=94.149µs max=25.531931ms mean=1.944109ms median=1.494184ms
+```
+
+### rpcx05
+
+```
 2020-10-13T01:21:17.037+08:00 INF 1 main.go:62 >  clients=100 requests=1000 total=100000
 2020-10-13T01:21:21.772+08:00 INF 1 main.go:85 >  tps=21280 min=198.343µs max=65.501679ms mean=4.606586ms median=3.483975ms
 ```
 
-### rpcx05
+### rpcx06
 
 ```
 2020-10-13T01:21:50.088+08:00 INF 1 main.go:62 >  clients=100 requests=1000 total=100000
 2020-10-13T01:21:53.332+08:00 INF 1 main.go:85 >  tps=31102 min=148.555µs max=69.896592ms mean=3.158439ms median=2.449258ms
 ```
 
-### rpcx06
+### rpcx07
 
 ```
 2020-10-13T01:22:18.433+08:00 INF 1 main.go:62 >  clients=100 requests=1000 total=100000
 2020-10-13T01:22:22.822+08:00 INF 1 main.go:85 >  tps=22943 min=191.919µs max=64.135991ms mean=4.285427ms median=3.329058ms
+```
+
+### rpcx08
+
+```
+2020-10-13T11:05:07.709+08:00 INF 1 main.go:66 >  clients=100 requests=1000 total=100000
+2020-10-13T11:05:11.525+08:00 INF 1 main.go:89 >  tps=26421 min=171.441µs max=60.401377ms mean=3.717221ms median=2.901175ms
 ```
 
 ### gomicro01

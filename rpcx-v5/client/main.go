@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/micro-svc/go-rpc-framework-benchmark/model/standard/model"
+	"github.com/micro-svc/go-rpc-framework-benchmark/rpcx-v5/codec"
 
 	ulog "github.com/gxxgle/go-utils/log"
 	"github.com/montanaflynn/stats"
@@ -23,15 +24,16 @@ var (
 	requests  = flag.Int("requests", 1000, "request amount per client")
 	address   = flag.String("addr", "127.0.0.1:5678", "server address")
 	transport = flag.String("transport", "tcp", "server transport") // tcp, quic, utp
-	codec     = flag.String("codec", "json", "server codec")        // json, protobuf, msgpack
+	xcodec    = flag.String("codec", "json", "server codec")        // json, protobuf, msgpack, jsoniter
 
 	option = client.DefaultOption
 )
 
 func main() {
 	flag.Parse()
-	xlog.SetDummyLogger()
 	ulog.ColorConsole()
+	xlog.SetDummyLogger()
+	codec.Register()
 
 	switch *transport {
 	case "tcp":
@@ -41,13 +43,15 @@ func main() {
 		log.Fatal().Msg("flag transport not support")
 	}
 
-	switch *codec {
+	switch *xcodec {
 	case "json":
 		option.SerializeType = protocol.JSON
 	case "protobuf":
 		option.SerializeType = protocol.ProtoBuffer
 	case "msgpack":
 		option.SerializeType = protocol.MsgPack
+	case "jsoniter":
+		option.SerializeType = codec.JSONiter
 	default:
 		log.Fatal().Msg("flag codec not support")
 	}
