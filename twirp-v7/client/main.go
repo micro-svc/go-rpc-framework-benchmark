@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 	"flag"
+	"net"
 	"net/http"
+	"net/http/cookiejar"
 	"sync"
 	"time"
 
@@ -80,7 +82,7 @@ func main() {
 func newClients(amount int) []model.Hello {
 	clis := make([]model.Hello, amount)
 	for i := 0; i < amount; i++ {
-		clis[i] = newClient("http://"+*address, &http.Client{})
+		clis[i] = newClient("http://"+*address, newHTTPClient())
 		call(clis[i]) // warmup
 	}
 	return clis
@@ -89,4 +91,25 @@ func newClients(amount int) []model.Hello {
 func call(cli model.Hello) {
 	_, err := cli.Hello(context.Background(), model.Example)
 	ulog.FatalIfError(err)
+}
+
+func newHTTPClient() *http.Client {
+	jar, _ := cookiejar.New(nil)
+	transport := &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: 30 * time.Second,
+			DualStack: true,
+		}).DialContext,
+		MaxIdleConns:          100,
+		IdleConnTimeout:       90 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+	}
+	return &http.Client{
+		Jar:       jar,
+		Transport: transport,
+		Timeout:   2 * time.Minute,
+	}
 }
