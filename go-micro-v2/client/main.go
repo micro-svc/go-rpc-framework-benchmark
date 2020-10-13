@@ -27,7 +27,6 @@ var (
 
 func main() {
 	flag.Parse()
-	ulog.ColorConsole()
 
 	switch *transport {
 	case "grpc":

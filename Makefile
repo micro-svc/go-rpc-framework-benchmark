@@ -1,6 +1,6 @@
 GOBUILD = go build -ldflags "-w -s"
 
-ALL: lint build
+ALL: lint build benchmark
 
 .PHONY: lint
 lint:
@@ -9,3 +9,7 @@ lint:
 .PHONY: build
 build:
 	./scripts/build.sh
+
+.PHONY: benchmark
+benchmark:
+	./scripts/benchmark.sh

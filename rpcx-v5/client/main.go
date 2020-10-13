@@ -31,7 +31,6 @@ var (
 
 func main() {
 	flag.Parse()
-	ulog.ColorConsole()
 	xlog.SetDummyLogger()
 	codec.Register()
 

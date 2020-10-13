@@ -27,7 +27,6 @@ var (
 
 func main() {
 	flag.Parse()
-	// ulog.ColorConsole()
 
 	var (
 		wg        sync.WaitGroup

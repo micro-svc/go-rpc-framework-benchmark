@@ -1,0 +1,13 @@
+gin|gin|bin/gin-srv|bin/gin-cli
+grpc|grpc|bin/grpc-srv|bin/grpc-cli
+rpcx01|rpcx-v5|bin/rpcx-v5-srv|bin/rpcx-v5-cli --transport=tcp --codec=json
+rpcx02|rpcx-v5|bin/rpcx-v5-srv|bin/rpcx-v5-cli --transport=tcp --codec=protobuf
+rpcx03|rpcx-v5|bin/rpcx-v5-srv|bin/rpcx-v5-cli --transport=tcp --codec=msgpack
+rpcx04|rpcx-v5|bin/rpcx-v5-srv|bin/rpcx-v5-cli --transport=tcp --codec=jsoniter
+rpcx05|rpcx-v5|bin/rpcx-v5-srv --transport=quic|bin/rpcx-v5-cli --transport=quic --codec=json
+rpcx06|rpcx-v5|bin/rpcx-v5-srv --transport=quic|bin/rpcx-v5-cli --transport=quic --codec=protobuf
+rpcx07|rpcx-v5|bin/rpcx-v5-srv --transport=quic|bin/rpcx-v5-cli --transport=quic --codec=msgpack
+rpcx08|rpcx-v5|bin/rpcx-v5-srv --transport=quic|bin/rpcx-v5-cli --transport=quic --codec=jsoniter
+gomicro01|go-micro-v2|bin/go-micro-v2-srv|bin/go-micro-v2-cli
+twirp01|twirp-v7|bin/twirp-v7-srv|bin/twirp-v7-cli --codec=json
+twirp02|twirp-v7|bin/twirp-v7-srv|bin/twirp-v7-cli --codec=protobuf

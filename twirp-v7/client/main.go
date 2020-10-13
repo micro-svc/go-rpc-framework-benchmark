@@ -29,7 +29,6 @@ var (
 
 func main() {
 	flag.Parse()
-	ulog.ColorConsole()
 
 	switch *codec {
 	case "json":
