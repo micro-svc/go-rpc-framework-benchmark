@@ -27,8 +27,8 @@ var (
 	// flags
 	clients   = flag.Int("clients", 100, "concurrency client amount")
 	requests  = flag.Int("requests", 1000, "request amount per client")
-	transport = flag.String("transport", "grpc", "server transport") // grpc, http
-	codec     = flag.String("codec", "protobuf", "server codec")     // protobuf, json
+	transport = flag.String("transport", "grpc", "server transport [grpc, http]")
+	codec     = flag.String("codec", "json", "server codec [json, protobuf]")
 
 	newServer = server.NewServer
 	newClient = client.NewClient

@@ -20,13 +20,27 @@ import (
 
 var (
 	// flags
-	clients  = flag.Int("clients", 100, "concurrency client amount")
-	requests = flag.Int("requests", 1000, "request amount per client")
-	address  = flag.String("addr", "127.0.0.1:5678", "server address")
+	clients   = flag.Int("clients", 100, "concurrency client amount")
+	requests  = flag.Int("requests", 1000, "request amount per client")
+	address   = flag.String("addr", "127.0.0.1:5678", "server address")
+	transport = flag.String("transport", "http", "server transport [http]")
+	codec     = flag.String("codec", "json", "server codec [json]")
 )
 
 func main() {
 	flag.Parse()
+
+	switch *transport {
+	case "http":
+	default:
+		log.Fatal().Msg("flag transport not support")
+	}
+
+	switch *codec {
+	case "json":
+	default:
+		log.Fatal().Msg("flag codec not support")
+	}
 
 	var (
 		wg        sync.WaitGroup

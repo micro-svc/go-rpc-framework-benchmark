@@ -21,62 +21,14 @@
   <body>
     <div id="chart"></div>
     <script>
-      var categories = [
-        "gin",
-        "grpc",
-        "rpcx-01",
-        "rpcx-02",
-        "rpcx-03",
-        "rpcx-04",
-        "go-micro-01",
-        "go-micro-02",
-        "go-micro-03",
-        "go-micro-04",
-        "twirp-01",
-        "twirp-02",
-        "erpc-01",
-        "erpc-02",
-        "arpc-01",
-        "arpc-02",
-        "arpc-03",
+      var categories = [{% for Result in Results %}
+        "{{ Result.Name }}",{% endfor %}
       ];
-      var data = [
-        29241,
-        49967,
-        38435,
-        73303,
-        40637,
-        53163,
-        6879,
-        24923,
-        4297,
-        4016,
-        8344,
-        41862,
-        38183,
-        62062,
-        44339,
-        89693,
-        63259,
+      var data = [{% for Result in Results %}
+        {{ Result.TPS }},{% endfor %}
       ];
-      var colors = [
-        "#264653",
-        "#2a9d8f",
-        "#e9c46a",
-        "#e9c46a",
-        "#e9c46a",
-        "#e9c46a",
-        "#f4a261",
-        "#f4a261",
-        "#f4a261",
-        "#f4a261",
-        "#e76f51",
-        "#e76f51",
-        "#264653",
-        "#264653",
-        "#2a9d8f",
-        "#2a9d8f",
-        "#2a9d8f",
+      var colors = [{% for Result in Results %}
+        "{{ Result.Color }}",{% endfor %}
       ];
       var options = {
         colors: colors,
@@ -87,7 +39,7 @@
         stroke: { width: 1, colors: ["#fff"] },
         chart: { type: "bar", height: 50 * data.length },
         grid: { padding: { left: 50, right: 50 }, strokeDashArray: 10 },
-        subtitle: { text: "TPS (Updated: 2020-10-14)", align: "center" },
+        subtitle: { text: "TPS (Updated: {{ UpdatedAt }})", align: "center" },
         title: { text: "Go RPC framework benchmark result", align: "center" },
         plotOptions: {
           bar: {

@@ -19,16 +19,23 @@ import (
 
 var (
 	// flags
-	clients  = flag.Int("clients", 100, "concurrency client amount")
-	requests = flag.Int("requests", 1000, "request amount per client")
-	address  = flag.String("addr", "127.0.0.1:5678", "server address")
-	codec    = flag.String("codec", "json", "server codec") // json, protobuf
+	clients   = flag.Int("clients", 100, "concurrency client amount")
+	requests  = flag.Int("requests", 1000, "request amount per client")
+	address   = flag.String("addr", "127.0.0.1:5678", "server address")
+	transport = flag.String("transport", "http", "server transport [http]")
+	codec     = flag.String("codec", "json", "server codec [json, protobuf]")
 
 	newClient func(string, model.HTTPClient, ...twirp.ClientOption) model.Hello
 )
 
 func main() {
 	flag.Parse()
+
+	switch *transport {
+	case "http":
+	default:
+		log.Fatal().Msg("flag transport not support")
+	}
 
 	switch *codec {
 	case "json":

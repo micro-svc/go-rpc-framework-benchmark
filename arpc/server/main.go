@@ -16,8 +16,8 @@ import (
 var (
 	// flags
 	address   = flag.String("addr", "127.0.0.1:5678", "server listen address")
-	transport = flag.String("transport", "tcp", "server transport") // tcp
-	xcodec    = flag.String("codec", "json", "server codec")        // json, jsoniter, protobuf
+	transport = flag.String("transport", "tcp", "server transport [tcp]")
+	xcodec    = flag.String("codec", "json", "server codec [json, jsoniter, protobuf]")
 
 	acodec codec.Codec
 )

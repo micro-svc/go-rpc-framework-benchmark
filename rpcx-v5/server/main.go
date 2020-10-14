@@ -17,7 +17,7 @@ import (
 var (
 	// flags
 	address   = flag.String("addr", "127.0.0.1:5678", "server listen address")
-	transport = flag.String("transport", "tcp", "server transport") // tcp, quic, utp
+	transport = flag.String("transport", "tcp", "server transport [tcp, quic, utp]")
 
 	options []server.OptionFn
 )

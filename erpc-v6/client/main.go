@@ -19,8 +19,8 @@ var (
 	clients   = flag.Int("clients", 100, "concurrency client amount")
 	requests  = flag.Int("requests", 1000, "request amount per client")
 	address   = flag.String("addr", "127.0.0.1:5678", "server listen address")
-	transport = flag.String("transport", "tcp", "server transport") // tcp
-	xcodec    = flag.String("codec", "json", "server codec")        // json, protobuf
+	transport = flag.String("transport", "tcp", "server transport [tcp]")
+	xcodec    = flag.String("codec", "json", "server codec [json, protobuf]")
 
 	cfgCodec string
 )

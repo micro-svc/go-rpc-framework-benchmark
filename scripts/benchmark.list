@@ -1,18 +1,17 @@
-gin|gin|bin/gin-srv|bin/gin-cli
-grpc|grpc|bin/grpc-srv|bin/grpc-cli
+gin|gin|bin/gin-srv|bin/gin-cli --transport=http --codec=json
+grpc|grpc|bin/grpc-srv|bin/grpc-cli --transport=grpc --codec=protobuf
 rpcx-01|rpcx-v5|bin/rpcx-v5-srv --transport=tcp|bin/rpcx-v5-cli --transport=tcp --codec=json
 rpcx-02|rpcx-v5|bin/rpcx-v5-srv --transport=tcp|bin/rpcx-v5-cli --transport=tcp --codec=protobuf
 rpcx-03|rpcx-v5|bin/rpcx-v5-srv --transport=tcp|bin/rpcx-v5-cli --transport=tcp --codec=msgpack
 rpcx-04|rpcx-v5|bin/rpcx-v5-srv --transport=tcp|bin/rpcx-v5-cli --transport=tcp --codec=jsoniter
-rpcx-05|rpcx-v5|bin/rpcx-v5-srv --transport=quic|bin/rpcx-v5-cli --transport=quic --codec=json
-rpcx-06|rpcx-v5|bin/rpcx-v5-srv --transport=quic|bin/rpcx-v5-cli --transport=quic --codec=protobuf
-rpcx-07|rpcx-v5|bin/rpcx-v5-srv --transport=quic|bin/rpcx-v5-cli --transport=quic --codec=msgpack
-rpcx-08|rpcx-v5|bin/rpcx-v5-srv --transport=quic|bin/rpcx-v5-cli --transport=quic --codec=jsoniter
 go-micro-01|go-micro-v2|bin/go-micro-v2-srv --transport=grpc|bin/go-micro-v2-cli --transport=grpc --codec=json
 go-micro-02|go-micro-v2|bin/go-micro-v2-srv --transport=grpc|bin/go-micro-v2-cli --transport=grpc --codec=protobuf
 go-micro-03|go-micro-v2|bin/go-micro-v2-srv --transport=http|bin/go-micro-v2-cli --transport=http --codec=json
 go-micro-04|go-micro-v2|bin/go-micro-v2-srv --transport=http|bin/go-micro-v2-cli --transport=http --codec=protobuf
-twirp-01|twirp-v7|bin/twirp-v7-srv|bin/twirp-v7-cli --codec=json
-twirp-02|twirp-v7|bin/twirp-v7-srv|bin/twirp-v7-cli --codec=protobuf
-erpc-01|erpc-v6|bin/erpc-v6-srv --codec=json|bin/erpc-v6-cli --codec=json
-erpc-02|erpc-v6|bin/erpc-v6-srv --codec=protobuf|bin/erpc-v6-cli --codec=protobuf
+twirp-01|twirp-v7|bin/twirp-v7-srv|bin/twirp-v7-cli --transport=http --codec=json
+twirp-02|twirp-v7|bin/twirp-v7-srv|bin/twirp-v7-cli --transport=http --codec=protobuf
+erpc-01|erpc-v6|bin/erpc-v6-srv --codec=json|bin/erpc-v6-cli --transport=tcp --codec=json
+erpc-02|erpc-v6|bin/erpc-v6-srv --codec=protobuf|bin/erpc-v6-cli --transport=tcp --codec=protobuf
+arpc-01|arpc|bin/arpc-srv --codec=json|bin/arpc-cli --transport=tcp --codec=json
+arpc-02|arpc|bin/arpc-srv --codec=protobuf|bin/arpc-cli --transport=tcp --codec=protobuf
+arpc-03|arpc|bin/arpc-srv --codec=jsoniter|bin/arpc-cli --transport=tcp --codec=jsoniter

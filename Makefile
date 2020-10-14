@@ -17,3 +17,11 @@ build:
 .PHONY: benchmark
 benchmark:
 	./scripts/benchmark.sh
+
+.PHONY: gen-docs
+gen-docs:
+	cd tools && go run gen/main.go --gen=docs >../docs/index.html 2>&1
+
+.PHONY: gen-readme
+gen-readme:
+	cd tools && go run gen/main.go --gen=readme >../README.md 2>&1

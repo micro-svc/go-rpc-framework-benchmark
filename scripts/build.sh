@@ -31,8 +31,8 @@ _build() {
   while IFS="|" read -r name; do
     echo "build $name"
     cd $name
-    go build -tags "quic" -ldflags "-w -s" -o ../bin/$name-srv server/*.go
-    go build -tags "quic" -ldflags "-w -s" -o ../bin/$name-cli client/*.go
+    go build -tags "quic utp" -ldflags "-w -s" -o ../bin/$name-srv server/*.go
+    go build -tags "quic utp" -ldflags "-w -s" -o ../bin/$name-cli client/*.go
     cd ..
   done <"$file"
 }

@@ -1,0 +1,38 @@
+[![result](./docs/images/result_xxx.png)](https://micro-svc.github.io/go-rpc-framework-benchmark/)
+
+## 测试结果
+
+| name | package | transport | codec | tps |
+| ---- | ------- | --------- | ----- | --: |
+{% for Result in Results %}| {{ Result.Name }} | {{ Result.Package }} | `{{ Result.Transport }}` | `{{ Result.Codec }}` | {{ Result.TPS }} |
+{% endfor %}
+
+> 机器配置：4 Cores 16G Memory
+
+> 更新时间：{{ UpdatedAt }}
+
+## 测试列表
+
+- [gin](https://github.com/gin-gonic/gin)：WEB 框架，用来和 RPC 做对比
+- [grpc](https://github.com/grpc/grpc-go)：跨语言 RPC 框架
+- [rpcx/v5](https://github.com/smallnest/rpcx)：RPC 框架，自带微服务组件
+- [go-micro/v2](https://github.com/micro/go-micro)：RPC 框架，自带微服务组件
+- [twirp/v7](https://github.com/twitchtv/twirp)：RPC 框架
+- [erpc-v6](https://github.com/henrylee2cn/erpc)：RPC 框架
+- [arpc](https://github.com/lesismal/arpc)：RPC 框架
+
+## 详细结果
+
+{% for Result in Results %}### {{ Result.Name }}
+
+```sh
+$ bin/{{ Result.Package }}-cli --transport={{ Result.Transport }} --codec={{ Result.Codec }}
+{{ Result.Detail|safe }}```
+
+{% endfor %}
+
+## TODO
+
+- [go-chassis](https://github.com/go-chassis/go-chassis)
+- [TarsGo](https://github.com/TarsCloud/TarsGo)
+- [go-zero](https://github.com/tal-tech/go-zero)

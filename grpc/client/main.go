@@ -16,13 +16,27 @@ import (
 
 var (
 	// flags
-	clients  = flag.Int("clients", 100, "concurrency client amount")
-	requests = flag.Int("requests", 1000, "request amount per client")
-	address  = flag.String("addr", "127.0.0.1:5678", "server address")
+	clients   = flag.Int("clients", 100, "concurrency client amount")
+	requests  = flag.Int("requests", 1000, "request amount per client")
+	address   = flag.String("addr", "127.0.0.1:5678", "server address")
+	transport = flag.String("transport", "grpc", "server transport [grpc]")
+	codec     = flag.String("codec", "protobuf", "server codec [protobuf]")
 )
 
 func main() {
 	flag.Parse()
+
+	switch *transport {
+	case "grpc":
+	default:
+		log.Fatal().Msg("flag transport not support")
+	}
+
+	switch *codec {
+	case "protobuf":
+	default:
+		log.Fatal().Msg("flag codec not support")
+	}
 
 	var (
 		wg        sync.WaitGroup

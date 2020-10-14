@@ -21,7 +21,7 @@ import (
 var (
 	// flags
 	address   = flag.String("addr", "127.0.0.1:5678", "server listen address")
-	transport = flag.String("transport", "grpc", "server transport") // grpc, http
+	transport = flag.String("transport", "grpc", "server transport [grpc, http]")
 
 	newServer = server.NewServer
 	newClient = client.NewClient
