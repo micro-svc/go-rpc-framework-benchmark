@@ -1,4 +1,4 @@
-[![result](image/result_20201014_012332.png)](https://micro-svc.github.io/go-rpc-framework-benchmark)
+[![result](./docs/images/result_20201014_012332.png)](https://micro-svc.github.io/go-rpc-framework-benchmark)
 
 更新时间：2020-10-14
 

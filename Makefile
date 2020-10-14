@@ -4,11 +4,11 @@ ALL: lint build
 
 .PHONY: lint
 lint:
-	./scripts/lint.sh
+	./scripts/build.sh lint
 
 .PHONY: build
 build:
-	./scripts/build.sh
+	./scripts/build.sh build
 
 .PHONY: benchmark
 benchmark:
