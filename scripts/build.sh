@@ -9,6 +9,15 @@ if [ ! -f "$file" ]; then
   exit 1
 fi
 
+_gomod_tidy() {
+  while IFS="|" read -r name; do
+    echo "go mod tidy $name"
+    cd $name
+    rm -f go.sum && go mod tidy
+    cd ..
+  done <"$file"
+}
+
 _lint() {
   while IFS="|" read -r name; do
     echo "lint $name"
@@ -29,6 +38,9 @@ _build() {
 }
 
 case "$1" in
+gomod-tidy)
+  _gomod_tidy
+  ;;
 lint)
   _lint
   ;;
