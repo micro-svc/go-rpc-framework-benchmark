@@ -7,6 +7,7 @@ import (
 
 	"github.com/micro-svc/go-rpc-framework-benchmark/model/standard/model"
 
+	_ "github.com/gxxgle/go-utils/log"
 	"github.com/henrylee2cn/erpc/v6"
 	"github.com/henrylee2cn/erpc/v6/codec"
 	"github.com/montanaflynn/stats"
@@ -104,5 +105,8 @@ func call(cli erpc.Session) {
 	stat := cli.Call("/server/hello", model.Example, rsp).Status()
 	if !stat.OK() {
 		log.Fatal().Msg(stat.String())
+	}
+	if !model.CheckExample(rsp) {
+		log.Fatal().Str("response", rsp.String()).Msg("response not match")
 	}
 }

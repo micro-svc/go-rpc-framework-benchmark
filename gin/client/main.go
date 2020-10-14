@@ -78,11 +78,15 @@ func newClients(amount int) []*http.Client {
 
 func call(cli *http.Client) {
 	bs, _ := json.Marshal(model.Example)
-	rsp, err := cli.Post("http://"+*address, "application/json", bytes.NewBuffer(bs))
+	httprsp, err := cli.Post("http://"+*address, "application/json", bytes.NewBuffer(bs))
 	ulog.FatalIfError(err)
-	defer rsp.Body.Close()
-	body, _ := ioutil.ReadAll(rsp.Body)
-	ulog.FatalIfError(json.Unmarshal(body, &model.Message{}))
+	defer httprsp.Body.Close()
+	body, _ := ioutil.ReadAll(httprsp.Body)
+	rsp := &model.Message{}
+	ulog.FatalIfError(json.Unmarshal(body, rsp))
+	if !model.CheckExample(rsp) {
+		log.Fatal().Str("response", rsp.String()).Msg("response not match")
+	}
 }
 
 func newHTTPClient() *http.Client {

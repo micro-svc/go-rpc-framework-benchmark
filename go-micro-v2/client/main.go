@@ -121,6 +121,9 @@ func newClients(amount int) []model.HelloService {
 }
 
 func call(cli model.HelloService) {
-	_, err := cli.Hello(context.Background(), model.Example)
+	rsp, err := cli.Hello(context.Background(), model.Example)
 	ulog.FatalIfError(err)
+	if !model.CheckExample(rsp) {
+		log.Fatal().Str("response", rsp.String()).Msg("response not match")
+	}
 }

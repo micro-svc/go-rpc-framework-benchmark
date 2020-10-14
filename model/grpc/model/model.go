@@ -38,3 +38,11 @@ func example() *Message {
 
 	return msg
 }
+
+func CheckExample(msg *Message) bool {
+	return msg.Field01 > 0 &&
+		msg.Field01 == Example.Field01 &&
+		msg.Field02 == Example.Field02 &&
+		msg.Field03 == Example.Field03 &&
+		msg.Field04 == Example.Field04
+}

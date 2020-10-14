@@ -88,8 +88,11 @@ func newClients(amount int) []model.Hello {
 }
 
 func call(cli model.Hello) {
-	_, err := cli.Hello(context.Background(), model.Example)
+	rsp, err := cli.Hello(context.Background(), model.Example)
 	ulog.FatalIfError(err)
+	if !model.CheckExample(rsp) {
+		log.Fatal().Str("response", rsp.String()).Msg("response not match")
+	}
 }
 
 func newHTTPClient() *http.Client {

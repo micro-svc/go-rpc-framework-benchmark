@@ -105,6 +105,10 @@ func newClients(amount int) []client.XClient {
 }
 
 func call(cli client.XClient) {
-	err := cli.Call(context.Background(), "Hello", model.Example, &model.Message{})
+	rsp := &model.Message{}
+	err := cli.Call(context.Background(), "Hello", model.Example, rsp)
 	ulog.FatalIfError(err)
+	if !model.CheckExample(rsp) {
+		log.Fatal().Str("response", rsp.String()).Msg("response not match")
+	}
 }
